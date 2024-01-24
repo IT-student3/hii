@@ -1,3 +1,25 @@
+// Add a function for throwing animation
+function throwAwayPaper(paper) {
+    const throwDistance = 100; // Adjust the distance as needed
+    const throwAngle = Math.random() * 360; // Random angle for throwing
+    const throwX = throwDistance * Math.cos(throwAngle);
+    const throwY = throwDistance * Math.sin(throwAngle);
+
+    paper.style.transition = "transform 0.5s ease-in-out";
+    paper.style.transform = `translateX(${throwX}px) translateY(${throwY}px) rotateZ(${throwAngle}deg)`;
+}
+
+// Add an event listener to throw the paper when released
+window.addEventListener('mouseup', () => {
+    if (selectedPaper) {
+        selectedPaper.holdingPaper = false;
+        selectedPaper.rotating = false;
+        throwAwayPaper(selectedPaper.element);
+        selectedPaper = null;
+    }
+});
+
+
 let highestZ = 1;
 class Paper {
     holdingPaper = false;
